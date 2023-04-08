@@ -1,25 +1,68 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
+import Users from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Product = db.define(
-  "product",
-  {
-    productName: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
-    image: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    url: DataTypes.STRING,
+const Products = db.define("products",{
+    uuid: {
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+        len: [3, 100]
+      }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      }
+    }
   },
   {
-    freezeTableId: true,
+    freezeTableName: true,
   }
 );
 
-export default Product;
+Users.hasMany(Products, {onDelete: 'CASCADE'});
+Products.belongsTo(Users, {foreignKey: 'userId', onDelete: 'CASCADE'});
 
-// membuat table product ketika tidak ada di database
-(async () => {
-  await db.sync();
-})();
+export default Products;
