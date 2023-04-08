@@ -7,6 +7,16 @@ const { DataTypes } = Sequelize;
 const Transaction = db.define(
   "transaction",
   {
+    id:{
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+      // autoIncrement: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     uuid: {
       type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4,
@@ -16,7 +26,8 @@ const Transaction = db.define(
       },
     },
     transNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       validate: {
         notEmpty: true,

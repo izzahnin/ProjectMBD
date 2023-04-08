@@ -7,7 +7,7 @@ import FileUpload from "express-fileupload";
 import SequelizeStore from "connect-session-sequelize";
 import ProductRoute from "./routes/ProductRoute.js";
 import UserRoute from "./routes/UserRoute.js";
-import CartRoute from "./routes/CartRoute.js";
+// import CartRoute from "./routes/CartRoute.js";
 import DetailTransRoute from "./routes/DetailTransRoute.js";
 import TransactionRoute from "./routes/TransactionRoute.js";
 import CustomerRoute from "./routes/CustomerRoute.js";
@@ -47,7 +47,7 @@ app.use(express.static("public")); //untuk image dari backend kita
 
 app.use(ProductRoute);
 app.use(UserRoute);
-app.use(CartRoute);
+// app.use(CartRoute);
 app.use(DetailTransRoute);
 app.use(TransactionRoute);
 app.use(CustomerRoute);

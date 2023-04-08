@@ -46,13 +46,21 @@ const Customers = db.define(
         notEmpty: true
       }
     },
+    transId: {
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      validate:{
+        notEmpty: true
+      }
+    }
   },
   {
     freezeTableName: true,
   }
 );
 
-Transaction.hasOne(Customers, {onDelete: 'CASCADE'});
+Transaction.hasOne(Customers, { onDelete: 'CASCADE'});
 Customers.belongsTo(Transaction, {foreignKey: "transId"});
 
 export default Customers;

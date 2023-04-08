@@ -24,14 +24,14 @@ const DetailTrans = db.define(
       },
     },
     transId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING,
+      defaultValue: DataTypes.UUIDV4,
       validate: {
         notEmpty: true,
       },
     },
     productId: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,

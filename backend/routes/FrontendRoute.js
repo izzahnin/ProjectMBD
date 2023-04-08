@@ -1,5 +1,14 @@
 import express from "express";
-import { getProductsHome, getProductPage, getProductDetail} from "../controllers/FrontendController.js";
+import {
+  getProductsHome,
+  getProductPage,
+  getProductDetail,
+  getCartData,
+  addCartData, 
+  updateCartData,
+  deleteCartData,
+  checkout
+} from "../controllers/FrontendController.js";
 
 const router = express.Router();
 
@@ -14,7 +23,7 @@ router.put('/cart/:id', updateCartData);
 router.delete('/cart/:id', deleteCartData);
 
 // handle checkout
-router.get('/checkout/:cartId', getCheckoutData);
+router.post('/checkout', checkout);
 
 
 export default router;

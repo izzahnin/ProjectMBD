@@ -1,13 +1,20 @@
+// TIDAK TERPAKE, TAPI JANGAN DIHAPUS DULU
+// TIDAK TERPAKE, TAPI JANGAN DIHAPUS DULU
+
 import Sequelize from 'sequelize';
 import db from "../config/Database.js";
+// import DetailTrans from './DetailTransModel.js';
 
 const { DataTypes, Sequelize, sequelize } = Sequelize;
 
-db.product = require("./ProductModel.js");
-db.cart = require("./CartModel.js");
-db.transaction = require("./TransactionModel.js");
-db.transactionDetail = require("./TransactionDetail.js");
-db.customer = require("./Customer.js");
+Product = require("./ProductModel.js");
+Cart = require("./CartModel.js");
+DetailTrans = require("./DetailTransModel.js");
+Customer = require("./CustomerModel.js");
+
+Users.hasMany(Products, {onDelete: 'SET NULL'});
+Products.belongsTo(Users, {foreignKey: 'userId', onDelete: 'SET NULL'});
+
 
 db.product.hasMany(db.cart, { foreignKey: "product_id" , onDelete: 'CASCADE'});
 db.cart.belongsTo(db.product, { foreignKey: "product_id" });

@@ -5,6 +5,16 @@ import Users from "./UserModel.js";
 const { DataTypes } = Sequelize;
 
 const Products = db.define("products",{
+  id:{
+    type: DataTypes.STRING,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+    // autoIncrement: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
     uuid: {
       type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4,
