@@ -42,7 +42,7 @@ const Cart = db.define(
   }
 );
 
-Products.hasMany(Cart, { onDelete: "CASCADE" });
+Products.hasMany(Cart);
 Cart.belongsTo(Products, { foreignKey: "productId", onDelete: "CASCADE" });
 
 export default Cart;

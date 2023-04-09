@@ -60,7 +60,9 @@ const Customers = db.define(
   }
 );
 
-Transaction.hasOne(Customers, { onDelete: 'CASCADE'});
+Transaction.hasOne(Customers);
 Customers.belongsTo(Transaction, {foreignKey: "transId"});
 
 export default Customers;
+
+// { onDelete: 'UPDATE'}

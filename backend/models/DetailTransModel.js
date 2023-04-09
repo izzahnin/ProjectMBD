@@ -47,6 +47,6 @@ Products.hasMany(DetailTrans);
 DetailTrans.belongsTo(Products, { foreignKey: "productId" });
 
 Transaction.hasMany(DetailTrans);
-DetailTrans.belongsTo(Transaction, { foreignKey: "transId", onDelete: 'CASCADE' });
+DetailTrans.belongsTo(Transaction, { foreignKey: "transId"});
 
 export default DetailTrans;
