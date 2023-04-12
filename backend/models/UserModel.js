@@ -40,7 +40,8 @@ const Users = db.define("users",{
       allowNull: false,
       validate:{
         notEmpty: true,
-      }
+      },
+      defaultValue: "user"
     },
   },
   {

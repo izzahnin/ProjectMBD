@@ -61,7 +61,7 @@ const Customers = db.define(
 );
 
 Transaction.hasOne(Customers);
-Customers.belongsTo(Transaction, {foreignKey: "transId"});
+Customers.belongsTo(Transaction, {foreignKey: "transId"}, { onDelete: 'UPDATE' });
 
 export default Customers;
 

@@ -6,7 +6,7 @@ import Transaction from "./TransactionModel.js";
 const { DataTypes } = Sequelize;
 
 const DetailTrans = db.define(
-  "detailTrans",
+  "detailtrans",
   {
     uuid: {
       type: DataTypes.STRING,
@@ -23,9 +23,10 @@ const DetailTrans = db.define(
         notEmpty: true,
       },
     },
-    transId: {
+    transId: {  
       type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       validate: {
         notEmpty: true,
       },
@@ -37,6 +38,9 @@ const DetailTrans = db.define(
         notEmpty: true,
       },
     },
+    // detailTransId: {
+      
+    // }
   },
   {
     freezeTableName: true,
@@ -46,7 +50,7 @@ const DetailTrans = db.define(
 Products.hasMany(DetailTrans);
 DetailTrans.belongsTo(Products, { foreignKey: "productId" });
 
-Transaction.hasMany(DetailTrans);
-DetailTrans.belongsTo(Transaction, { foreignKey: "transId"});
+Transaction.hasMany(DetailTrans); 
+DetailTrans.belongsTo(Transaction, { foreignKey: "transId"}, { onDelete: 'UPDATE' });
 
 export default DetailTrans;

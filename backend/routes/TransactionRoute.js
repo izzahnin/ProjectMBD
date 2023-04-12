@@ -6,7 +6,7 @@ import {
 } from "../controllers/TransactionController.js";
 
 const router = express.Router();
-
+ 
 router.get('/transaction', getTransactions)
 router.get('/transaction/:id', getTransactionById)
 router.put('/transaction/:id', updateTransaction)

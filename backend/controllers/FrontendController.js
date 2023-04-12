@@ -178,7 +178,7 @@ export const deleteCartData = async (req, res) => {
 };
 
 export const checkout = async (req, res) => {
-  const sessionId = req.query.sessionId;
+  const {sessionId} = req.query;
   const data = {
     name : req.body.name,
     email : req.body.email,
@@ -186,33 +186,61 @@ export const checkout = async (req, res) => {
     address : req.body.address,
   }
 
+  console.log("lewat0", sessionId)
+
   const dataCart = await Cart.findAll({
     where: { sessionId: sessionId },
   });
+
+  if (!dataCart.length) {
+    res.status(404).json({ msg: "Data not found"})
+  }
+
+  console.log("lewat0", await Cart.findAll({
+    where: { sessionId: sessionId },
+  }))
 
   if (dataCart.length > 0) {
     const transNumber = 'TRS-'+ Date.now();
     const transId = uuidv4();
 
+    console.log("lewat1")
     
     const dataTransaction = {
       id: transId,
       transNumber : transNumber,
+      uuid: transId
     }
+    console.log("lewat2")
+    
+    await Transaction.create( {
+      id: dataTransaction.id,
+      transNumber: dataTransaction.transNumber,
+      uuid: dataTransaction.uuid
+    });
 
-    await Transaction.create(dataTransaction);
+    console.log("lewat3", dataCart)
 
-    await dataCart.map((item, index) => {
+    dataCart.map(async (item, index) => {
       const dataDetail = {
         quantity: item.quantity,
         productId: item.productId,
+        transId,
       };
 
-      DetailTrans.create(dataDetail);
-      Cart.destroy({ where: { id: item.id } });
+      console.log("masuk map")
+
+      await DetailTrans.create(dataDetail);
+      await Cart.destroy({ where: { id: item.id } });
     })
 
-    await Customers.create(data);
+    await Customers.create({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      transId: transId
+    });
 
     await res.status(200).json({msg: "Data has been checkout"})
   }
