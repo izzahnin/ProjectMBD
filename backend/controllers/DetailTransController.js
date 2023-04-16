@@ -1,3 +1,9 @@
+// TIDAK TERPAKAI
+// TIDAK TERPAKAI
+// TIDAK TERPAKAI
+// TIDAK TERPAKAI
+// TIDAK TERPAKAI
+
 import DetailTrans from "../models/DetailTransModel.js";
 
 export const getDetailTranss = async (req, res) => {
